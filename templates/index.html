@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Загрузка изображения или текста</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+<div class="container">
+  <h1>Загрузка изображения или текста</h1>
+
+  <!-- Оповещение о двух видах поиска -->
+  <div class="alert-info">
+    <p>Представлены два вида поиска схожих изображений:</p>
+    <ul>
+      <li><strong>1. Загрузка вашего изображения</strong> — вывод сюжета по изображению и вывод 20 схожих изображений.</li>
+      <li><strong>2. Ввод вашего сюжета</strong> — вывод 20 изображений по введенному сюжету.</li>
+    </ul>
+  </div>
+
+  <form id="uploadForm" action="{{ url_for('index') }}" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <input type="file" name="file" accept="image/*" title="Выбрать файл" aria-label="Выбрать файл">
+
+      <!-- Добавляем слово "или" между полем ввода текста и загрузки изображения -->
+      <span class="or-text">или</span>
+
+      <input type="text" name="text" placeholder="Введите текст" title="Введите текст" aria-label="Введите текст" value="{{ search_text }}">
+    </div>
+    <button type="submit" name="submit" title="Загрузить" aria-label="Загрузить">Загрузить</button>
+  </form>
+
+<!-- Блок для отображения изображения после выбора -->
+<div id="imagePreview" style="display: none; margin-top: 20px;">
+  <h3>Предварительный просмотр изображения:</h3>
+  <img id="uploadedImage" src="" alt="Загруженное изображение" style="max-width: 100%; height: auto;">
+</div>
+
+  <!-- Выводим текст запроса и сообщение -->
+  <div class="message" id="message">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+</div>
+
+<div class="container">
+  <h2>Результаты поиска</h2>
+    <div id="loader" class="loader" style="display: none;"></div>
+  <div class="results">
+    <!-- Кружок загрузки -->
+
+
+    {% for result in results %}
+      <div class="photo-frame">
+        <img src="{{ url_for('static', filename='dataset/' + result.source_file + '/' + result.image_name) }}" alt="Image" class="frame-image">
+        <div class="description">
+          <p><strong>Описание:</strong> {{ result.description }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<div class="action-buttons">
+  <button id="downloadZip" title="Скачать ZIP" aria-label="Скачать ZIP" >Скачать ZIP</button>
+  <button id="addData" title="Добавить данные" aria-label="Добавить данные">Добавить свои данные</button>
+</div>
+
+<!-- Раздел с информацией о кейсе и команде -->
+<footer class="case-info">
+  <div class="case-section">
+    <h3>Информация о кейсе</h3>
+    <p><strong>Название кейса:</strong> Поиск смысловых схожих изображений</p>
+    <p><strong>Кейсодержатель:</strong> РКН</p>
+  </div>
+
+  <div class="team-section">
+    <h3>Информация о команде</h3>
+    <p><strong>Название команды:</strong> fit.TUSUR</p>
+    <p><strong>Участники:</strong></p>
+    <ul>
+      <li>Алешкович Роман</li>
+      <li>Матвиенко Михаил</li>
+      <li>Танасенко Станислав</li>
+      <li>Маниченко Никита</li>
+    </ul>
+    <p><strong>Контакты:</strong> @last_attempt_to</p>
+  </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="../static/js/script.js"></script>
+</body>
+</html>

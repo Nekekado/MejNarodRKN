@@ -1,0 +1,308 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(45deg, #1B262C, #24353E);
+  background-size: cover;
+}
+
+.container {
+  background-color: rgba(36, 53, 62, 0.9);
+  padding: 25px;
+  border-radius: 12px;
+  /* Градиентная внешняя тень */
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.4),
+              0 0 10px 5px rgba(58, 94, 114, 0.4),
+              0 0 10px 5px rgba(122, 207, 255, 0.2);
+  text-align: center;
+  width: 80%;
+  max-width: 800px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.photo-frame {
+  background-color: #3A5E72;
+  border: 1px solid #172126;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  /* Градиентная внешняя тень */
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3),
+              0 0 5px rgba(58, 94, 114, 0.4),
+              0 0 5px rgba(122, 207, 255, 0.2);
+}
+
+
+/* Скрываем стандартное поле выбора файла */
+.container input[type="file"] {
+  color: white;
+
+}
+
+.form-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  background-color: #1F2D34;
+  color: white;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  flex: 1;
+}
+
+/* Общие стили для всех кнопок */
+button, #downloadZip, #addData {
+  padding: 10px 20px;
+  background-color: #3A5E72;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+}
+
+/* Плавная анимация при наведении */
+button:hover, #downloadZip:hover, #addData:hover {
+  background: linear-gradient(90deg, #CAECFF, #78CFFF);
+  transform: scale(1.04); /* Увеличение на 4% */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* Плавная тень */
+}
+
+/* Анимация при нажатии */
+button:active, #downloadZip:active, #addData:active {
+  transform: scale(0.97); /* Небольшое уменьшение */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); /* Мягкая тень */
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);  /* 5 колонок для 20 фото */
+  gap: 10px;
+  margin-top: 40px;
+  color: white;
+  overflow-x: auto; /* Добавляем горизонтальную прокрутку при необходимости */
+}
+
+.photo-frame {
+  background-color: #3A5E72;
+  border: 1px solid #172126;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 150px;  /* Минимальная ширина фрейма */
+  height: auto;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3),
+              0 0 5px rgba(58, 94, 114, 0.4),
+              0 0 5px rgba(122, 207, 255, 0.2);
+}
+
+.frame-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;  /* Обрезка изображения, если его размер не совпадает */
+  border-radius: 5px;
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 14px;
+  color: white;
+  text-align: center; /* Выравниваем описание по центру */
+  max-width: 200px;  /* Ограничиваем ширину блока с описанием */
+  word-wrap: break-word; /* Разбиение текста на слова, если описание длинное */
+}
+
+
+
+.message {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold; /* Опционально, можно добавить для выделения */
+  background: linear-gradient(90deg, #CAECFF, #78CFFF); /* Градиент */
+  -webkit-background-clip: text; /* Для поддержки в WebKit браузерах */
+  background-clip: text; /* Стандартное свойство */
+  color: transparent; /* Делает сам текст прозрачным, чтобы показать градиент */
+}
+
+.success-message {
+  margin-top: 20px;
+  color: #3A5E72;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#downloadZip {
+  padding: 10px 20px;
+  background-color: #3A5E72;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#addData {
+  padding: 10px 20px;
+  background-color: #3A5E72;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.alert {
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.alert-success {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.alert-error {
+  background-color: #f44336;
+  color: white;
+}
+
+.alert-warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+/* Стили для оповещения */
+.alert-info {
+  background-color: #1F2D34;
+  border-left: 5px solid #78CFFF; /* Добавляем синий акцент слева */
+  padding: 20px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.alert-info p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.alert-info ul {
+  margin-top: 10px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.alert-info li {
+  margin-bottom: 10px;
+}
+
+.alert-info li strong {
+  color: #78CFFF;
+}
+
+/* Стили для текста "или" */
+.or-text {
+  font-size: 18px;
+  color: white;
+  margin: 0 10px;
+  align-self: center;
+}
+
+/* Кружок загрузки */
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #78CFFF;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+
+  position: page;
+  align-self: center;
+}
+
+/* Анимация вращения */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Стили для информации о кейсе и команде */
+footer.case-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #1F2D34;
+  padding: 20px;
+  color: #FFF;
+  margin-top: 30px;
+  border-top: 2px solid #78CFFF;
+  width: 100%;
+  text-align: left;
+}
+
+/* Стили для секции кейса и команды */
+.case-section, .team-section {
+  width: 45%;
+}
+
+/* Заголовок внутри футера */
+footer.case-info h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #78CFFF;
+  font-size: 20px;
+}
+
+/* Оформление текста информации о кейсе и команде */
+footer.case-info p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+/* Стили для списка участников */
+footer.case-info ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  padding-left: 0;
+  font-size: 16px;
+  color: #CAECFF;
+}
+
+/* Стили для выделения названий и контактной информации */
+footer.case-info strong {
+  color: #CAECFF;
+}
+
+
