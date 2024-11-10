@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Загрузка изображения или текста</title>
-  <link rel="stylesheet" href="../static/css/style.css">
+  <meta charset="UTF-8"> <!-- Установка кодировки страницы -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Обеспечение адаптивности на мобильных устройствах -->
+  <title>Загрузка изображения или текста</title> <!-- Заголовок страницы -->
+  <link rel="stylesheet" href="../static/css/style.css"> <!-- Подключение внешнего CSS-файла для стилизации -->
 </head>
 <body>
 <div class="container">
@@ -19,29 +19,33 @@
     </ul>
   </div>
 
+  <!-- Форма для загрузки файла или ввода текста -->
   <form id="uploadForm" action="{{ url_for('index') }}" method="post" enctype="multipart/form-data">
     <div class="form-group">
+      <!-- Поле для выбора файла изображения -->
       <input type="file" name="file" accept="image/*" title="Выбрать файл" aria-label="Выбрать файл">
 
-      <!-- Добавляем слово "или" между полем ввода текста и загрузки изображения -->
+      <!-- Слово "или" между полем ввода текста и загрузки изображения -->
       <span class="or-text">или</span>
 
+      <!-- Поле для ввода текста для поиска -->
       <input type="text" name="text" placeholder="Введите текст" title="Введите текст" aria-label="Введите текст" value="{{ search_text }}">
     </div>
-    <button type="submit" name="submit" title="Загрузить" aria-label="Загрузить">Поиск</button>
+    <button type="submit" name="submit" title="Загрузить" aria-label="Загрузить">Поиск</button> <!-- Кнопка отправки формы -->
   </form>
 
-<!-- Блок для отображения изображения после выбора -->
-<div id="imagePreview" style="display: none; margin-top: 20px;">
-  <h3>Предварительный просмотр изображения:</h3>
-  <img id="uploadedImage" src="" alt="Загруженное изображение">
-</div>
+  <!-- Блок для отображения изображения после выбора -->
+  <div id="imagePreview" style="display: none; margin-top: 20px;">
+    <h3>Предварительный просмотр изображения:</h3>
+    <img id="uploadedImage" src="" alt="Загруженное изображение"> <!-- Изображение, которое выбрал пользователь -->
+  </div>
 
-  <!-- Выводим текст запроса и сообщение -->
+  <!-- Блок для отображения сообщений (например, об ошибках или успешных действиях) -->
   <div class="message" id="message">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
+          <!-- Сообщение от Flask, отображается с определенной категорией -->
           <div class="alert alert-{{ category }}">{{ message }}</div>
         {% endfor %}
       {% endif %}
@@ -49,14 +53,14 @@
   </div>
 </div>
 
+<!-- Раздел для отображения результатов поиска -->
 <div class="container">
   <h2>Результаты поиска</h2>
-    <div id="loader" class="loader" style="display: none;"></div>
+    <div id="loader" class="loader" style="display: none;"></div> <!-- Кружок загрузки, показывается, когда результаты загружаются -->
   <div class="results">
-    <!-- Кружок загрузки -->
-
-
+    <!-- Здесь будут отображаться результаты поиска (схожие изображения) -->
     {% for result in results %}
+      <!-- Для каждого результата выводим изображение с описанием -->
       <div class="photo-frame">
         <img src="{{ url_for('static', filename='dataset/' + result.source_file + '/' + result.image_name) }}" alt="Image" class="frame-image">
         <div class="description">
@@ -67,13 +71,13 @@
   </div>
 </div>
 
-
+<!-- Кнопки для скачивания ZIP-архива с изображениями и добавления собственных данных -->
 <div class="action-buttons">
-  <button id="downloadZip" title="Скачать ZIP" aria-label="Скачать ZIP" >Скачать ZIP</button>
+  <button id="downloadZip" title="Скачать ZIP" aria-label="Скачать ZIP">Скачать ZIP</button>
   <button id="addData" title="Добавить данные" aria-label="Добавить данные">Добавить свои данные</button>
 </div>
 
-<!-- Раздел с информацией о кейсе и команде -->
+<!-- Подвал с информацией о проекте и команде -->
 <footer class="case-info">
   <div class="case-section">
     <h3>Информация о кейсе</h3>
@@ -95,9 +99,10 @@
   </div>
 </footer>
 
-
+<!-- Подключаем библиотеки для работы с ZIP-архивами и сохранением файлов -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<!-- Подключаем внешний скрипт для обработки клиентской части -->
 <script src="../static/js/script.js"></script>
 </body>
 </html>
