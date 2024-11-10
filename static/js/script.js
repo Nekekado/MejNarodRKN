@@ -5,9 +5,29 @@ const resultMessage = document.getElementById('resultMessage');
 const uploadForm = document.getElementById('uploadForm');
 const loader = document.getElementById('loader');
 const imageFrames = document.querySelector('.results');
-
+// Получаем элемент выбора файла и блок для предварительного просмотра
+const fileInput = document.querySelector('input[type="file"]');
+const imagePreview = document.getElementById('imagePreview');
+const uploadedImage = document.getElementById('uploadedImage');
 
 let imagePaths = [];
+
+// Отслеживаем изменение выбранного файла
+fileInput.addEventListener('change', function() {
+    const file = fileInput.files[0];
+
+    if (file) {
+        // Отображаем блок предварительного просмотра
+        imagePreview.style.display = 'block';
+
+        // Создаем URL для выбранного файла и устанавливаем его как источник изображения
+        const fileURL = URL.createObjectURL(file);
+        uploadedImage.src = fileURL;
+    } else {
+        // Скрываем блок предварительного просмотра, если файл не выбран
+        //imagePreview.style.display = 'none';
+    }
+});
 
 // Перехватываем отправку формы
 uploadForm.addEventListener('submit', function (e) {

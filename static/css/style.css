@@ -132,8 +132,6 @@ button:active, #downloadZip:active, #addData:active {
   word-wrap: break-word; /* Разбиение текста на слова, если описание длинное */
 }
 
-
-
 .message {
   margin-top: 20px;
   font-size: 16px;
@@ -305,4 +303,25 @@ footer.case-info strong {
   color: #CAECFF;
 }
 
+#imagePreview {
+  background-color: #3A5E72;
+  border: 1px solid #172126;
+  display: inline-block;
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px;
+  align-self: center;
 
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3),
+              0 0 5px rgba(58, 94, 114, 0.4),
+              0 0 5px rgba(122, 207, 255, 0.2);
+}
+
+#imagePreview img {
+  max-width: 200px; /* Максимальная ширина */
+  max-height: 200px; /* Максимальная высота */
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+}

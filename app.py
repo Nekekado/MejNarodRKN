@@ -1,15 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 from _fit_tusur_func import generate_caption, search_top_20_similar  # Импорт функций
 import os
-import zipfile
-from io import BytesIO
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Для отображения сообщений
+app.secret_key = "your_secret_key"
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -52,8 +49,6 @@ def index():
             flash("Пожалуйста, выберите изображение или введите текст для загрузки.", "warning")
 
     return render_template("index.html", results=results, search_text=search_text)
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
